@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>UBDress | Catálogo</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      background: #080808;
+      color: white;
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+    }
+
+    /* ================= HEADER ================= */
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(8, 8, 8, 0.95);
+      backdrop-filter: blur(15px);
+      border-bottom: 1px solid #242424;
+    }
+
+    .header {
+      max-width: 1400px;
+      margin: auto;
+      min-height: 75px;
+      padding: 15px 25px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 25px;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      white-space: nowrap;
+    }
+
+    .logo span {
+      color: #777;
+    }
+
+    .search {
+      flex: 1;
+      max-width: 550px;
+      position: relative;
+    }
+
+    .search input {
+      width: 100%;
+      padding: 14px 45px 14px 18px;
+
+      background: #151515;
+      border: 1px solid #303030;
+      border-radius: 30px;
+
+      color: white;
+      outline: none;
+      font-size: 14px;
+    }
+
+    .search input:focus {
+      border-color: #777;
+    }
+
+    .search-icon {
+      position: absolute;
+      right: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #888;
+    }
+
+    /* ================= HERO ================= */
+
+    .hero {
+      max-width: 1400px;
+      min-height: 420px;
+      margin: 25px auto;
+
+      padding: 50px;
+
+      border: 1px solid #272727;
+      border-radius: 20px;
+
+      display: flex;
+      align-items: center;
+
+      background:
+        linear-gradient(
+          90deg,
+          rgba(0,0,0,.95),
+          rgba(0,0,0,.45)
+        ),
+        linear-gradient(
+          135deg,
+          #242424,
+          #050505
+        );
+    }
+
+    .hero-content {
+      max-width: 650px;
+    }
+
+    .hero h1 {
+      font-size: clamp(48px, 8vw, 90px);
+      line-height: .9;
+      font-weight: 900;
+      letter-spacing: -3px;
+      margin-bottom: 25px;
+    }
+
+    .hero p {
+      color: #aaa;
+      font-size: 17px;
+      line-height: 1.6;
+      margin-bottom: 30px;
+    }
+
+    .hero-button {
+      padding: 14px 25px;
+
+      background: white;
+      color: black;
+
+      border: none;
+      border-radius: 7px;
+
+      font-weight: bold;
+    }
+
+    /* ================= CONTENIDO ================= */
+
+    .container {
+      max-width: 1400px;
+      margin: auto;
+      padding: 30px 25px 80px;
+    }
+
+    .section-title {
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+
+    /* ================= CATEGORÍAS ================= */
+
+    .categories {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+      margin-bottom: 50px;
+    }
+
+    .category {
+      min-height: 120px;
+
+      background: #151515;
+      border: 1px solid #292929;
+      border-radius: 12px;
+
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+
+      transition: .2s;
+    }
+
+    .category:hover,
+    .category.active {
+      background: white;
+      color: black;
+      transform: translateY(-3px);
+    }
+
+    /* ================= MARCAS ================= */
+
+    .brands {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 45px;
+    }
+
+    .brand {
+      padding: 11px 18px;
+
+      background: #151515;
+      border: 1px solid #303030;
+      border-radius: 25px;
+
+      color: white;
+      font-size: 14px;
+
+      transition: .2s;
+    }
+
+    .brand:hover,
+    .brand.active {
+      background: white;
+      color: black;
+    }
+
+    /* ================= PRODUCTOS ================= */
+
+    .products-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      margin-bottom: 20px;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .product {
+      overflow: hidden;
+
+      background: #141414;
+      border: 1px solid #292929;
+      border-radius: 13px;
+
+      transition: .2s;
+    }
+
+    .product:hover {
+      transform: translateY(-5px);
+      border-color: #555;
+    }
+
+    .product-image {
+      width: 100%;
+      height: 300px;
+
+      background: #202020;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      overflow: hidden;
+    }
+
+    .product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .no-image {
+      color: #666;
+      font-size: 12px;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .product-info {
+      padding: 16px;
+    }
+
+    .brand-name {
+      color: #888;
+      font-size: 12px;
+      text-transform: uppercase;
+      margin-bottom: 7px;
+      letter-spacing: 1px;
+    }
+
+    .product-name {
+      font-size: 17px;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    .whatsapp-button {
+      width: 100%;
+      padding: 13px;
+
+      background: #25D366;
+      color: white;
+
+      border: none;
+      border-radius: 7px;
+
+      font-size: 13px;
+      font-weight: bold;
+
+      transition: .2s;
+    }
+
+    .whatsapp-button:hover {
+      background: #20b957;
+      transform: scale(1.02);
+    }
+
+    /* ================= SIN RESULTADOS ================= */
+
+    .no-results {
+      grid-column: 1 / -1;
+
+      padding: 80px 20px;
+
+      text-align: center;
+      color: #777;
+    }
+
+    /* ================= FOOTER ================= */
+
+    footer {
+      padding: 45px 25px;
+
+      background: #050505;
+      border-top: 1px solid #222;
+
+      text-align: center;
+      color: #666;
+    }
+
+    footer strong {
+      color: white;
+    }
+
+    /* ================= MÓVIL ================= */
+
+    @media (max-width: 1000px) {
+
+      .products {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .categories {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+    }
+
+    @media (max-width: 700px) {
+
+      .header {
+        flex-wrap: wrap;
+      }
+
+      .logo {
+        font-size: 22px;
+      }
+
+      .search {
+        order: 3;
+        flex-basis: 100%;
+      }
+
+      .hero {
+        margin: 15px;
+        padding: 45px 25px;
+        min-height: 350px;
+      }
+
+      .hero h1 {
+        font-size: 55px;
+      }
+
+      .container {
+        padding: 25px 15px 60px;
+      }
+
+      .categories {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .products {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+      }
+
+      .product-image {
+        height: 220px;
+      }
+
+      .product-info {
+        padding: 12px;
+      }
+
+      .product-name {
+        font-size: 14px;
+      }
+
+    }
+
+    @media (max-width: 400px) {
+
+      .product-image {
+        height: 190px;
+      }
+
+      .hero h1 {
+        font-size: 45px;
+      }
+
+      .category {
+        min-height: 100px;
+      }
+
+    }
+
+  </style>
+</head>
+
+<body>
+
+
+<!-- ================= CABECERA ================= -->
+
+<header>
+
+  <div class="header">
+
+    <div class="logo">
+      UB<span>DRESS</span>
+    </div>
+
+    <div class="search">
+
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="Buscar producto o marca..."
+        oninput="searchProducts()"
+      >
+
+      <span class="search-icon">⌕</span>
+
+    </div>
+
+  </div>
+
+</header>
+
+
+<!-- ================= PORTADA ================= -->
+
+<section class="hero">
+
+  <div class="hero-content">
+
+    <h1>
+      UB<br>DRESS
+    </h1>
+
+    <p>
+      Descubre nuestra colección de ropa,
+      zapatillas y accesorios de diferentes marcas
+      y estilos.
+    </p>
+
+    <button
+      class="hero-button"
+      onclick="scrollToCatalog()"
+    >
+      VER CATÁLOGO
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- ================= CATÁLOGO ================= -->
+
+<main class="container" id="catalog">
+
+
+  <!-- CATEGORÍAS -->
+
+  <h2 class="section-title">
+    Categorías
+  </h2>
+
+  <div class="categories">
+
+    <button
+      class="category active"
+      onclick="filterCategory('Todos', this)"
+    >
+      Todo
+    </button>
+
+    <button
+      class="category"
+      onclick="filterCategory('Sudaderas', this)"
+    >
+      Sudaderas
+    </button>
+
+    <button
+      class="category"
+      onclick="filterCategory('Camisetas', this)"
+    >
+      Camisetas
+    </button>
+
+    <button
+      class="category"
+      onclick="filterCategory('Pantalones', this)"
+    >
+      Pantalones
+    </button>
+
+    <button
+      class="category"
+      onclick="filterCategory('Chaquetas', this)"
+    >
+      Chaquetas
+    </button>
+
+    <button
+      class="category"
+      onclick="filterCategory('Accesorios', this)"
+    >
+      Accesorios
+    </button>
+
+  </div>
+
+
+  <!-- MARCAS -->
+
+  <h2 class="section-title">
+    Marcas
+  </h2>
+
+  <div class="brands">
+
+    <button
+      class="brand active"
+      onclick="filterBrand('Todas', this)"
+    >
+      Todas
+    </button>
+
+    <button
+      class="brand"
+      onclick="filterBrand('Adidas', this)"
+    >
+      Adidas
+    </button>
+
+    <button
+      class="brand"
+      onclick="filterBrand('Nike', this)"
+    >
+      Nike
+    </button>
+
+    <button
+      class="brand"
+      onclick="filterBrand('Louis Vuitton', this)"
+    >
+      Louis Vuitton
+    </button>
+
+    <button
+      class="brand"
+      onclick="filterBrand('Gucci', this)"
+    >
+      Gucci
+    </button>
+
+    <button
+      class="brand"
+      onclick="filterBrand('Hoodrich', this)"
+    >
+      Hoodrich
+    </button>
+
+    <button
+      class="brand"
+      onclick="filterBrand('Puma', this)"
+    >
+      Puma
+    </button>
+
+    <button
+      class="brand"
+      onclick="filterBrand('New Balance', this)"
+    >
+      New Balance
+    </button>
+
+  </div>
+
+
+  <!-- PRODUCTOS -->
+
+  <div class="products-header">
+
+    <h2 class="section-title">
+      Productos
+    </h2>
+
+  </div>
+
+  <div
+    class="products"
+    id="products"
+  ></div>
+
+
+</main>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+  <p>
+    © 2026 <strong>UBDress</strong>
+  </p>
+
+  <br>
+
+  <p>
+    Catálogo online
+  </p>
+
+</footer>
+
+
+<script>
+
+  /* ==================================================
+     CONFIGURACIÓN DE WHATSAPP
+     ================================================== */
+
+  const whatsappNumber = "34610141620";
+
+
+  /* ==================================================
+     PRODUCTOS
+     ================================================== */
+
+  const products = [
+
+    {
+      id: 1,
+      name: "Sudadera Essential",
+      brand: "Adidas",
+      category: "Sudaderas",
+      image: "imagenes/sudadera-adidas.jpg"
+    },
+
+    {
+      id: 2,
+      name: "Tech Fleece Hoodie",
+      brand: "Nike",
+      category: "Sudaderas",
+      image: "imagenes/sudadera-nike.jpg"
+    },
+
+    {
+      id: 3,
+      name: "Monogram Hoodie",
+      brand: "Louis Vuitton",
+      category: "Sudaderas",
+      image: "imagenes/sudadera-lv.jpg"
+    },
+
+    {
+      id: 4,
+      name: "GG Hoodie",
+      brand: "Gucci",
+      category: "Sudaderas",
+      image: "imagenes/sudadera-gucci.jpg"
+    },
+
+    {
+      id: 5,
+      name: "OG Hoodie",
+      brand: "Hoodrich",
+      category: "Sudaderas",
+      image: "imagenes/sudadera-hoodrich.jpg"
+    },
+
+
+    {
+      id: 6,
+      name: "Trefoil T-Shirt",
+      brand: "Adidas",
+      category: "Camisetas",
+      image: "imagenes/camiseta-adidas.jpg"
+    },
+
+    {
+      id: 7,
+      name: "Sportswear T-Shirt",
+      brand: "Nike",
+      category: "Camisetas",
+      image: "imagenes/camiseta-nike.jpg"
+    },
+
+    {
+      id: 8,
+      name: "GG T-Shirt",
+      brand: "Gucci",
+      category: "Camisetas",
+      image: "imagenes/camiseta-gucci.jpg"
+    },
+
+    {
+      id: 9,
+      name: "LV T-Shirt",
+      brand: "Louis Vuitton",
+      category: "Camisetas",
+      image: "imagenes/camiseta-lv.jpg"
+    },
+
+    {
+      id: 10,
+      name: "Essential T-Shirt",
+      brand: "Hoodrich",
+      category: "Camisetas",
+      image: "imagenes/camiseta-hoodrich.jpg"
+    },
+
+
+    {
+      id: 11,
+      name: "Cargo Pants",
+      brand: "Adidas",
+      category: "Pantalones",
+      image: "imagenes/pantalon-adidas.jpg"
+    },
+
+    {
+      id: 12,
+      name: "Tech Pants",
+      brand: "Nike",
+      category: "Pantalones",
+      image: "imagenes/pantalon-nike.jpg"
+    },
+
+    {
+      id: 13,
+      name: "Track Pants",
+      brand: "Gucci",
+      category: "Pantalones",
+      image: "imagenes/pantalon-gucci.jpg"
+    },
+
+    {
+      id: 14,
+      name: "Monogram Pants",
+      brand: "Louis Vuitton",
+      category: "Pantalones",
+      image: "imagenes/pantalon-lv.jpg"
+    },
+
+    {
+      id: 15,
+      name: "Cargo",
+      brand: "Hoodrich",
+      category: "Pantalones",
+      image: "imagenes/pantalon-hoodrich.jpg"
+    },
+
+
+    {
+      id: 16,
+      name: "Puffer Jacket",
+      brand: "Adidas",
+      category: "Chaquetas",
+      image: "imagenes/chaqueta-adidas.jpg"
+    },
+
+    {
+      id: 17,
+      name: "Windrunner",
+      brand: "Nike",
+      category: "Chaquetas",
+      image: "imagenes/chaqueta-nike.jpg"
+    },
+
+    {
+      id: 18,
+      name: "GG Jacket",
+      brand: "Gucci",
+      category: "Chaquetas",
+      image: "imagenes/chaqueta-gucci.jpg"
+    },
+
+    {
+      id: 19,
+      name: "Bomber Jacket",
+      brand: "Louis Vuitton",
+      category: "Chaquetas",
+      image: "imagenes/chaqueta-lv.jpg"
+    },
+
+
+    {
+      id: 20,
+      name: "Heritage Cap",
+      brand: "Nike",
+      category: "Accesorios",
+      image: "imagenes/gorra-nike.jpg"
+    },
+
+    {
+      id: 21,
+      name: "Classic Cap",
+      brand: "Adidas",
+      category: "Accesorios",
+      image: "imagenes/gorra-adidas.jpg"
+    },
+
+    {
+      id: 22,
+      name: "GG Belt",
+      brand: "Gucci",
+      category: "Accesorios",
+      image: "imagenes/cinturon-gucci.jpg"
+    },
+
+    {
+      id: 23,
+      name: "LV Card Holder",
+      brand: "Louis Vuitton",
+      category: "Accesorios",
+      image: "imagenes/cartera-lv.jpg"
+    },
+
+    {
+      id: 24,
+      name: "Shoulder Bag",
+      brand: "Hoodrich",
+      category: "Accesorios",
+      image: "imagenes/bolso-hoodrich.jpg"
+    }
+
+  ];
+
+
+  /* ==================================================
+     FILTROS
+     ================================================== */
+
+  let currentCategory = "Todos";
+  let currentBrand = "Todas";
+
+
+  function renderProducts(list) {
+
+    const container =
+      document.getElementById("products");
+
+    container.innerHTML = "";
+
+
+    if (list.length === 0) {
+
+      container.innerHTML = `
+        <div class="no-results">
+          No hemos encontrado ningún producto.
+        </div>
+      `;
+
+      return;
+    }
+
+
+    list.forEach(product => {
+
+      const productElement =
+        document.createElement("article");
+
+      productElement.className = "product";
+
+
+      productElement.innerHTML = `
+
+        <div class="product-image">
+
+          <img
+            src="${product.image}"
+            alt="${product.brand} ${product.name}"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+          >
+
+          <span
+            class="no-image"
+            style="display:none"
+          >
+            IMAGEN DEL PRODUCTO
+          </span>
+
+        </div>
+
+
+        <div class="product-info">
+
+          <div class="brand-name">
+            ${product.brand}
+          </div>
+
+          <div class="product-name">
+            ${product.name}
+          </div>
+
+          <button
+            class="whatsapp-button"
+            onclick="orderWhatsApp('${product.name}', '${product.brand}')"
+          >
+            PEDIR POR WHATSAPP
+          </button>
+
+        </div>
+
+      `;
+
+
+      container.appendChild(productElement);
+
+    });
+
+  }
+
+
+  /* ==================================================
+     FILTRAR POR CATEGORÍA
+     ================================================== */
+
+  function filterCategory(category, button) {
+
+    currentCategory = category;
+
+
+    document
+      .querySelectorAll(".category")
+      .forEach(item => {
+        item.classList.remove("active");
+      });
+
+
+    button.classList.add("active");
+
+
+    filterProducts();
+
+  }
+
+
+  /* ==================================================
+     FILTRAR POR MARCA
+     ================================================== */
+
+  function filterBrand(brand, button) {
+
+    currentBrand = brand;
+
+
+    document
+      .querySelectorAll(".brand")
+      .forEach(item => {
+        item.classList.remove("active");
+      });
+
+
+    button.classList.add("active");
+
+
+    filterProducts();
+
+  }
+
+
+  /* ==================================================
+     FILTRAR PRODUCTOS
+     ================================================== */
+
+  function filterProducts() {
+
+    const search =
+      document
+      .getElementById("searchInput")
+      .value
+      .toLowerCase();
+
+
+    const filtered =
+      products.filter(product => {
+
+        const categoryMatch =
+          currentCategory === "Todos" ||
+          product.category === currentCategory;
+
+
+        const brandMatch =
+          currentBrand === "Todas" ||
+          product.brand === currentBrand;
+
+
+        const searchMatch =
+          product.name.toLowerCase().includes(search) ||
+          product.brand.toLowerCase().includes(search) ||
+          product.category.toLowerCase().includes(search);
+
+
+        return (
+          categoryMatch &&
+          brandMatch &&
+          searchMatch
+        );
+
+      });
+
+
+    renderProducts(filtered);
+
+  }
+
+
+  /* ==================================================
+     BUSCADOR
+     ================================================== */
+
+  function searchProducts() {
+    filterProducts();
+  }
+
+
+  /* ==================================================
+     WHATSAPP
+     ================================================== */
+
+  function orderWhatsApp(productName, brand) {
+
+    const message =
+      `Hola, quiero pedir información sobre este producto de UBDress:%0A%0A` +
+      `Marca: ${brand}%0A` +
+      `Producto: ${productName}`;
+
+
+    const url =
+      `https://wa.me/${whatsappNumber}?text=${message}`;
+
+
+    window.open(url, "_blank");
+
+  }
+
+
+  /* ==================================================
+     SCROLL AL CATÁLOGO
+     ================================================== */
+
+  function scrollToCatalog() {
+
+    document
+      .getElementById("catalog")
+      .scrollIntoView({
+        behavior: "smooth"
+      });
+
+  }
+
+
+  /* ==================================================
+     INICIAR
+     ================================================== */
+
+  renderProducts(products);
+
+</script>
+
+</body>
+</html>
